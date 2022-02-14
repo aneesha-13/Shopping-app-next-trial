@@ -1,32 +1,33 @@
-import { Navbar,Nav,NavDropdown,Form,FormControl,Button,Container } from 'react-bootstrap'
-function NavBar() {
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import styles from '../styles/Navbar.module.css';
+
+const NavBar = () => {
+  const cart = useSelector((state) => state.cart);
+
+  const getItemsCount = () => {
+    return cart.reduce((accumulator, item) => accumulator + item.quantity, 0);
+  };
+
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand href="/">Play-Store</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            {/* <Nav.Link href="/categories">Categories</Nav.Link> */}
-            <Nav.Link href="/explore">Explore</Nav.Link>
-          </Nav>
-          <Nav>
-          <NavDropdown title="Account" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="/accounts/accountDetails">Your Account</NavDropdown.Item>
-              <NavDropdown.Item href="/accounts/orders">Orders</NavDropdown.Item>
-              <NavDropdown.Item href="/accounts/wishlist">Wishlist</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Sign out</NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/signup">Sign up</Nav.Link>
-            <Nav.Link eventKey={2} href="?cart">
-              Cart
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  )
-}
-export default NavBar
+    <nav className={styles.navbar}>
+      <h6 className={styles.logo}>Play-Store</h6>
+      <ul className={styles.links}>
+        <li className={styles.navlink}>
+          <Link href="/">Home</Link>
+        </li>
+        
+        <li className={styles.navlink}>
+          <Link href="/explore">Explore</Link>
+        </li>
+        <li className={styles.navlink}>
+          <Link href="/cart">
+            <p>Cart ({getItemsCount()})</p>
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+export default NavBar;
