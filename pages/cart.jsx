@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Router from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   incrementQuantity,
@@ -17,7 +18,9 @@ const CartPage = () => {
       0
     );
   };
-
+const checkoutHandler=()=>{
+  Router.push('/login');
+}
   return (
     <div className={styles.container}>
       {cart.length === 0 ? (
@@ -55,6 +58,9 @@ const CartPage = () => {
             </div>
           ))}
           <h2>Grand Total: $ {getTotalPrice()}</h2>
+          <br/>
+          <button onClick={checkoutHandler}className={styles.buttonCheckOut}>CheckOut</button>
+      {/* <button onClick={() => dispatch(addToCart(product))} className={styles.button}></button> */}
         </>
       )}
     </div>

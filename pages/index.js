@@ -1,7 +1,6 @@
 import styles from '../styles/Home.module.css'
 import CategoryCard from '../components/CategoryCard';
-
-
+import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 
 export default function Home() {
   return (
